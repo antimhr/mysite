@@ -1,0 +1,54 @@
+{% extends "blog_base.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: "Lucid Console", monospace;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+<header class="masthead">
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-10 col-md-4 mx-auto">
+                <div class="site-heading">
+                    <h4 style="text-align: center; color:white; font-weight: bold;">Welcome To The Blog App</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+ {% if user.is_authenticated %}
+        <p style="margin:20px 50px;">Welcome {{ user.username }} !!!</p>
+
+<div class="container">
+    <a href="/blog/add" class="btn btn-primary btn-sm">Add Blog</a>
+    <div class="row">
+   {% endif %}
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for post in blogs %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text text-muted h6">{{ post.slug }} </p>
+                    <a href="{% url 'blog:details' post.id %}" class="btn btn-primary btn-sm">Read Blog</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
